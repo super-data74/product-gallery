@@ -145,7 +145,7 @@ if st.session_state.products:
             st.image(image_url, width=400)
         else:
             st.warning("⚠️ لا يوجد رابط صورة صالح. سيتم عرض صورة افتراضية.")
-            st.image("https://via.placeholder.com/400", width=400)
+            st.image("https://github.com/AlexNoor74/product-gallery/blob/main/pngwing.com.png", width=400)
 
     with col3:
         if len(st.session_state.products) > 1:
