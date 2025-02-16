@@ -35,7 +35,7 @@ def process_dataframe(df):
     # Rename column "image" to "image link" if needed.
     df.rename(columns={"image": "image link"}, inplace=True)
 
-    required_columns = {"name", "image link", "details"}
+    required_columns = {"name", "image link", "details", "price"}
     missing_columns = required_columns - set(df.columns)
     if missing_columns:
         st.error(f"Error: Missing columns: {', '.join(missing_columns)}", icon="❌")
@@ -114,18 +114,15 @@ st.button("🔄 إعادة ضبط", on_click=reset_products)
 # --- Data Source Selector ---
 if not st.session_state.file_uploaded:
     # st.markdown("### Select Data Source")
-    data_source = st.radio("Select Data Source", 
-                           horizontal=True,
-                           options=["Offline File [CSV, Excel]", "Google Sheet"], 
-                           index=1)  # default is Google Sheet
+    data_source = st.radio("Select Data Source", horizontal=True,
+                           options=["Offline File [CSV, Excel]", "Google Sheet"], index=1)  # default is Google Sheet
     st.session_state.data_source = data_source
 
     if data_source == "Offline File [CSV, Excel]":
         uploaded_file = st.file_uploader("📂 تحميل ملف Excel أو CSV", type=["xlsx", "csv"])
         if uploaded_file is not None:
             load_excel_data(uploaded_file)
-        else:
-            st.info("File already loaded. Click reset to load a different file.")
+
     else:
         # st.toast("🔒 Make sure the Google Sheet is publicly accessible.", icon="🔒")
         # st.info("Provide your Google Sheet information:")
@@ -140,6 +137,7 @@ if st.session_state.products:
 
     st.markdown(f"<h2 style='text-align: center;'>{product['name']}</h2>", unsafe_allow_html=True)
     st.markdown(f"<p style='text-align: center; font-size: 18px; color: #ababab;'>{product['details']}</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='text-align: center; font-size: 14px; color: #ababab;'>{product['price']}</p>", unsafe_allow_html=True)    
     
     st.markdown("""
         <style>
@@ -201,6 +199,7 @@ st.sidebar.write("""
    - **name (الاسم)**  
    - **image link (رابط الصورة)**  
    - **details (التفاصيل)**  
+   - **price (سعر)**  
 2. أو قم بإعداد Google Sheet يحتوي على نفس الأعمدة.
 3. اختر مصدر البيانات المناسب من الأعلى.
 4. استخدم **⬅️ السابق & التالي ➡️** للتنقل بين المنتجات.  
@@ -215,7 +214,8 @@ sample_data = pd.DataFrame({
         "https://images.pexels.com/photos/19986440/pexels-photo-19986440/free-photo-of-sweet-cake-with-heart-and-letter.jpeg",
         "https://images.unsplash.com/photo-1576566588028-4147f3842f27"
     ],
-    "details": ["Details about Product A", "Details about Product B", "Details about Product C"]
+    "details": ["Details about Product A", "Details about Product B", "Details about Product C"],
+    "price": ["2115 SAR", "250 SAR", "2300 SAR"]
 })
 
 buffer = io.BytesIO()
