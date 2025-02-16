@@ -194,37 +194,37 @@ if st.session_state.products:
 else:
     st.info("No products to display. Please load an Excel/CSV file or a Google Sheet.", icon="📌")
 
-# # --- Sidebar: Instructions (Translated) ---
-# st.sidebar.header("📌 التعليمات")
-# st.sidebar.write("""
-# 1. قم بإعداد ملف **Excel (.xlsx) أو CSV (.csv)** يحتوي على الأعمدة:  
-#    - **name (الاسم)**  
-#    - **image link (رابط الصورة)**  
-#    - **details (التفاصيل)**  
-# 2. أو قم بإعداد Google Sheet يحتوي على نفس الأعمدة.
-# 3. اختر مصدر البيانات المناسب من الأعلى.
-# 4. استخدم **⬅️ السابق & التالي ➡️** للتنقل بين المنتجات.  
-# """)
+# --- Sidebar: Instructions (Translated) ---
+st.sidebar.header("📌 التعليمات")
+st.sidebar.write("""
+1. قم بإعداد ملف **Excel (.xlsx) أو CSV (.csv)** يحتوي على الأعمدة:  
+   - **name (الاسم)**  
+   - **image link (رابط الصورة)**  
+   - **details (التفاصيل)**  
+2. أو قم بإعداد Google Sheet يحتوي على نفس الأعمدة.
+3. اختر مصدر البيانات المناسب من الأعلى.
+4. استخدم **⬅️ السابق & التالي ➡️** للتنقل بين المنتجات.  
+""")
 
-# # --- Sidebar: Sample Excel Download ---
-# st.sidebar.header("📄 Sample Excel Format")
-# sample_data = pd.DataFrame({
-#     "name": ["Product A", "Product B", "Product C"],
-#     "image": [
-#         "https://images.pexels.com/photos/19254458/pexels-photo-19254458/free-photo-of-elegant-couple-walking-on-the-pavement-in-city.jpeg", 
-#         "https://images.pexels.com/photos/19986440/pexels-photo-19986440/free-photo-of-sweet-cake-with-heart-and-letter.jpeg",
-#         "https://images.unsplash.com/photo-1576566588028-4147f3842f27"
-#     ],
-#     "details": ["Details about Product A", "Details about Product B", "Details about Product C"]
-# })
+# --- Sidebar: Sample Excel Download ---
+st.sidebar.header("📄 Sample Excel Format")
+sample_data = pd.DataFrame({
+    "name": ["Product A", "Product B", "Product C"],
+    "image": [
+        "https://images.pexels.com/photos/19254458/pexels-photo-19254458/free-photo-of-elegant-couple-walking-on-the-pavement-in-city.jpeg", 
+        "https://images.pexels.com/photos/19986440/pexels-photo-19986440/free-photo-of-sweet-cake-with-heart-and-letter.jpeg",
+        "https://images.unsplash.com/photo-1576566588028-4147f3842f27"
+    ],
+    "details": ["Details about Product A", "Details about Product B", "Details about Product C"]
+})
 
-# buffer = io.BytesIO()
-# with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-#     sample_data.to_excel(writer, index=False, sheet_name="Sheet1")
-# st.sidebar.download_button(
-#     label="Download Sample Excel",
-#     icon="📥",
-#     data=buffer,
-#     file_name="sample_product_data.xlsx",
-#     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-# )
+buffer = io.BytesIO()
+with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+    sample_data.to_excel(writer, index=False, sheet_name="Sheet1")
+st.sidebar.download_button(
+    label="Download Sample Excel",
+    icon="📥",
+    data=buffer,
+    file_name="sample_product_data.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
