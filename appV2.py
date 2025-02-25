@@ -181,7 +181,7 @@ if st.session_state.products:
         if isinstance(image_url, str) and image_url.startswith("http"):
             st.image(image_url, width=500)
         else:
-            st.warning("No valid image URL found. Displaying a placeholder image.", icon="⚠️")
+            # st.warning("No valid image URL found. Displaying a placeholder image.", icon="⚠️")
             st.image("https://github.com/super-data74/product-gallery/blob/main/Not_Available.png?raw=true")
 
     with col3:
