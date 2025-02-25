@@ -166,6 +166,7 @@ if st.session_state.products:
             font-family: 'Cairo', sans-serif;
             margin-top: 10px;
         }
+            .st-emotion-cache-0 {place-self: center;}
         </style>
     """, unsafe_allow_html=True)
     
