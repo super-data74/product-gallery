@@ -181,7 +181,7 @@ if st.session_state.products:
             st.image(image_url, width=500)
         else:
             st.warning("No valid image URL found. Displaying a placeholder image.", icon="⚠️")
-            st.image("http://primusdatabase.com/images/4/49/Not_Available.png", width=500)
+            st.image("https://github.com/super-data74/product-gallery/blob/main/Not_Available.png?raw=true")
 
     with col3:
         if len(st.session_state.products) > 1:
